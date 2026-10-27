@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Al Marjaa — Government Services, Handled</title>
+  <meta name="description" content="Commercial register, NSSF, real estate, vehicles, MoFA legalisation, insurance and more — send your documents online. | السجل التجاري، الضمان، العقارات، السيارات، الخارجية، التأمين." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    /* set language + theme before paint to avoid a flash */
+    (function(){var h=document.documentElement;h.setAttribute("data-theme","dark");try{var q=new URLSearchParams(location.search).get("lang");var l=q==="ar"||q==="en"?q:localStorage.getItem("lang");if(l==="ar"){h.lang="ar";h.dir="rtl";}var th=localStorage.getItem("theme");if(th==="light")h.setAttribute("data-theme","light");}catch(e){}})();
+  </script>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-cube"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    <p data-brand>Al Marjaa</p>
+  </div>
+
+  <!-- 3D background -->
+  <canvas id="scene"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <header class="nav">
+    <a href="#top" class="logo"><span class="logo-mark"></span><span data-brand>Al Marjaa</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#process" data-i18n="nav.how">How it works</a>
+      <a href="#apply" data-i18n="nav.apply">Send documents</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <button class="theme" id="themeBtn" type="button" aria-label="Switch theme">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5Z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+    <button class="lang" id="langBtn" type="button" aria-label="Switch language">عربي</button>
+    <a href="#apply" class="btn btn-small nav-cta" id="navCta">
+      <span class="avatar" id="navAvatar" hidden></span>
+      <svg class="cta-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
+      <span id="navCtaText" data-i18n="nav.cta">Start a file</span>
+    </a>
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span></button>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">Lebanon · Official paperwork, done right</span></p>
+        <h1 class="hero-title">
+          <span class="line" data-i18n="hero.l1">Every paper.</span>
+          <span class="line" data-i18n="hero.l2">Every ministry.</span>
+          <span class="line grad" data-i18n="hero.l3">One desk.</span>
+        </h1>
+        <p class="hero-sub" data-i18n="hero.sub"></p>
+        <div class="hero-cta">
+          <a href="#apply" class="btn" data-i18n="hero.cta1">Send your documents</a>
+          <a href="#services" class="btn btn-ghost" data-i18n="hero.cta2">Explore services</a>
+        </div>
+        <div class="hero-stats">
+          <div><b data-count="12">0</b><span data-i18n="stat.1">service areas</span></div>
+          <div><b data-count="38">0</b><span data-i18n="stat.2">transaction types</span></div>
+          <div><b data-count="24">0</b><span data-i18n="stat.3">hour reply</span></div>
+        </div>
+      </div>
+      <div class="scroll-hint"><span></span><i data-i18n="scroll">scroll</i></div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+    <!-- Services -->
+    <section id="services" class="section">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="svc.eyebrow">What we handle</p>
+        <h2 data-i18n="svc.title">Services</h2>
+        <p class="muted" data-i18n="svc.sub"></p>
+      </div>
+      <div class="filter">
+        <input type="search" id="search" data-i18n-ph="svc.search" />
+      </div>
+      <div class="grid" id="servicesGrid"></div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="section process">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="proc.eyebrow">How it works</p>
+        <h2 data-i18n="proc.title">Four steps, zero queues</h2>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="step-n">01</span><h3 data-i18n="s1.t"></h3><p data-i18n="s1.p"></p></li>
+        <li class="step"><span class="step-n">02</span><h3 data-i18n="s2.t"></h3><p data-i18n="s2.p"></p></li>
+        <li class="step"><span class="step-n">03</span><h3 data-i18n="s3.t"></h3><p data-i18n="s3.p"></p></li>
+        <li class="step"><span class="step-n">04</span><h3 data-i18n="s4.t"></h3><p data-i18n="s4.p"></p></li>
+      </ol>
+    </section>
+
+    <!-- Apply / Inquiry -->
+    <section id="apply" class="section apply">
+      <div class="apply-wrap">
+        <div class="apply-side">
+          <p class="eyebrow" data-i18n="apply.eyebrow">Send an inquiry</p>
+          <h2 data-i18n="apply.title">Open your file</h2>
+          <p class="muted" data-i18n="apply.sub"></p>
+          <div class="checklist-card" id="checklistCard"></div>
+          <p class="disclaimer" data-i18n="disclaimer"></p>
+        </div>
+
+        <form id="inquiryForm" class="form" method="POST" enctype="multipart/form-data" novalidate>
+          <!-- only used by the email fallback (FormSubmit) -->
+          <input type="hidden" name="_subject" id="fSubject" value="New inquiry" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" id="fNext" />
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" />
+
+          <div class="row">
+            <label class="field"><span data-i18n="f.name">Full name *</span><input name="Name" required autocomplete="name" /></label>
+            <label class="field"><span data-i18n="f.phone">Phone / WhatsApp *</span><input name="Phone" type="tel" required autocomplete="tel" placeholder="+961…" dir="ltr" /></label>
+          </div>
+          <div class="row">
+            <label class="field"><span data-i18n="f.email">Email</span><input name="email" type="email" autocomplete="email" dir="ltr" /></label>
+            <label class="field"><span data-i18n="f.pref">Preferred contact</span>
+              <select name="Preferred contact" id="fPref">
+                <option value="WhatsApp" data-i18n="f.pref.wa">WhatsApp</option>
+                <option value="Phone call" data-i18n="f.pref.call">Phone call</option>
+                <option value="Email" data-i18n="f.pref.email">Email</option>
+              </select>
+            </label>
+          </div>
+          <div class="row">
+            <label class="field"><span data-i18n="f.service">Service *</span><select name="Service" id="fService" required></select></label>
+            <label class="field"><span data-i18n="f.tx">Transaction *</span><select name="Transaction" id="fSub" required></select></label>
+          </div>
+
+          <div class="uploads" id="uploads"></div>
+
+          <div class="field"><span data-i18n="f.extra">Extra files</span>
+            <label class="drop" data-drop>
+              <input type="file" name="attachment" id="extraFiles" multiple accept=".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx" />
+              <p data-i18n="drop">Drop files or click to browse</p>
+            </label>
+          </div>
+
+          <label class="field"><span data-i18n="f.notes">Notes</span><textarea name="Message" rows="4" data-i18n-ph="f.notesPh"></textarea></label>
+
+          <div class="progress" id="progress" hidden><span></span></div>
+          <div class="form-foot">
+            <p class="small muted" id="sizeInfo"></p>
+            <button type="submit" class="btn" id="submitBtn" data-i18n="f.send">Send inquiry</button>
+          </div>
+          <p class="small muted"><span data-i18n="f.chat">Prefer chat?</span> <a href="#" data-wa data-i18n="f.chatLink">Send us your papers on WhatsApp</a></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="faq.eyebrow">Questions</p>
+        <h2 data-i18n="faq.title">FAQ</h2>
+      </div>
+      <div class="faq">
+        <details><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
+        <details><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
+        <details><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
+        <details><summary data-i18n="q4"></summary><p data-i18n="a4"></p></details>
+        <details><summary data-i18n="q5"></summary><p data-i18n="a5"></p></details>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+      <div class="contact-card">
+        <div>
+          <p class="eyebrow" data-i18n="c.eyebrow">Visit or call</p>
+          <h2 data-brand>Al Marjaa</h2>
+          <p class="ar big" data-brand-ar>المرجع</p>
+        </div>
+        <ul class="contact-list">
+          <li><span data-i18n="c.phone">Phone</span><a id="cPhone" href="#" dir="ltr"></a></li>
+          <li><span data-i18n="c.wa">WhatsApp</span><a href="#" data-wa id="cWa" dir="ltr"></a></li>
+          <li><span data-i18n="c.email">Email</span><a id="cEmail" href="#" dir="ltr"></a></li>
+          <li><span data-i18n="c.addr">Address</span><b id="cAddr"></b></li>
+          <li><span data-i18n="c.hours">Hours</span><b id="cHours"></b></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> <span data-brand>Al Marjaa</span>. <span data-i18n="footer"></span></p>
+  </footer>
+
+  <!-- Service modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+      <button class="modal-x" data-close aria-label="Close">×</button>
+      <div class="modal-head">
+        <div class="modal-icon" id="mIcon"></div>
+        <div><h3 id="mTitle"></h3><p class="alt" id="mAlt"></p></div>
+      </div>
+      <p class="muted" id="mBlurb"></p>
+      <div class="tabs" id="mTabs"></div>
+      <ul class="doclist" id="mDocs"></ul>
+      <button class="btn" id="mApply" data-i18n="modal.apply">Upload these documents</button>
+    </div>
+  </div>
+
+  <!-- Log in / Sign up -->
+  <div class="modal auth" id="authModal" aria-hidden="true">
+    <div class="modal-backdrop" data-aclose></div>
+    <div class="modal-card auth-card" role="dialog" aria-modal="true" aria-labelledby="aTitle">
+      <button class="modal-x" type="button" data-aclose aria-label="Close">×</button>
+      <div class="auth-orb" aria-hidden="true"><span class="logo-mark"></span></div>
+      <h3 id="aTitle">Welcome back</h3>
+      <p class="muted" id="aSub"></p>
+      <p class="auth-need" id="aNeed" data-i18n="auth.needLogin" hidden></p>
+      <div class="seg" id="aTabs">
+        <button type="button" data-v="login" data-i18n="auth.login">Log in</button>
+        <button type="button" data-v="signup" data-i18n="auth.signup">Sign up</button>
+      </div>
+      <form id="authForm" novalidate>
+        <label class="field" data-only="signup"><span data-i18n="auth.name"></span><input name="name" autocomplete="name" /></label>
+        <label class="field" data-only="signup"><span data-i18n="auth.phone"></span><input name="phone" type="tel" dir="ltr" autocomplete="tel" placeholder="+961…" /></label>
+        <label class="field" data-only="login signup reset"><span data-i18n="auth.email"></span><input name="email" type="email" dir="ltr" autocomplete="email" /></label>
+        <label class="field" data-only="code"><span data-i18n="auth.code"></span><input name="code" inputmode="numeric" autocomplete="one-time-code" dir="ltr" maxlength="6" class="code-input" /></label>
+        <label class="field" data-only="login signup code"><span data-i18n="auth.password"></span><input name="password" type="password" dir="ltr" autocomplete="current-password" />
+          <small class="muted" data-only="signup code" data-i18n="auth.passwordHint"></small></label>
+        <p class="auth-msg" id="aMsg" hidden></p>
+        <button class="btn auth-submit" id="aSubmit" type="submit">Log in</button>
+        <div class="auth-links">
+          <button type="button" class="linkbtn" id="aForgot" data-only="login" data-i18n="auth.forgot"></button>
+          <button type="button" class="linkbtn" id="aBack" data-only="reset code" data-i18n="auth.back"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- My files dashboard -->
+  <div class="dash" id="dash" aria-hidden="true">
+    <div class="dash-inner">
+      <header class="dash-head">
+        <div>
+          <p class="eyebrow" id="dSub"></p>
+          <h2 id="dHello"></h2>
+        </div>
+        <div class="dash-actions">
+          <button type="button" class="btn btn-small" id="dNew" data-i18n="dash.new">New inquiry</button>
+          <button type="button" class="btn btn-ghost btn-small" id="dRefresh" data-i18n="dash.refresh">Refresh</button>
+          <button type="button" class="btn btn-ghost btn-small" id="dLogout" data-i18n="dash.logout">Log out</button>
+          <button type="button" class="dash-x" id="dClose" aria-label="Close">×</button>
+        </div>
+      </header>
+      <div class="dash-tools" id="dTools" hidden>
+        <div class="seg" id="dScope">
+          <button type="button" data-v="all" data-i18n="dash.tab.all">All clients</button>
+          <button type="button" data-v="mine" data-i18n="dash.tab.mine">My files</button>
+        </div>
+        <input type="search" id="dSearch" data-i18n-ph="dash.search" />
+        <select id="dFilter"></select>
+      </div>
+      <div class="dash-stats" id="dStats"></div>
+      <div class="dash-list" id="dList"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <a class="wa-float" href="#" data-wa aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="26" height="26"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3Z"/></svg>
+  </a>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="i18n.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script src="account.js"></script>
+</body>
+</html>
