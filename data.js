@@ -17,7 +17,7 @@ window.SITE = {
   /* Google backend — accounts, uploads, tracking (see README).
      Paste the Apps Script web-app URL (ends in /exec). Until it is set, the form
      falls back to emailing inquiries. */
-  googleScriptUrl: "",
+  googleScriptUrl: "https://script.google.com/macros/s/AKfycbxByx78mUwoBaOk8TzyXGbxFTDyauhRFBPU4bu7WmjocWKvdbyq0kBK_BRQKQtw8Ojp/exec",
 
   maxUploadMB: 25                      // total size of all attachments per inquiry
 };
